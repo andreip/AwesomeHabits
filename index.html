@@ -18,7 +18,7 @@ body {
 <a href="/" class="ahref"><span class="brand" style="color: white;">AwesomeHabits</span></a>
 <div>
 <ul class="nav pull-right">
-<li><a href="#">Track my progress</a></li>
+<li><a href="#" id="progress-link">Track my progress</a></li>
 </ul>
 </div>
 </div>
@@ -33,10 +33,15 @@ body {
 </div>
 </div>
 </div>
+<script type="text/template" id="progress-template">
+    <div class="habit"><b><%= title %></b> <%= completed =></div>
+</script>
+
 </body>
 </html>
 <script src="http://dserban.github.com/js/jquery.js"></script>
 <script src="http://documentcloud.github.com/underscore/underscore.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone.js"></script>
 <script src="js/app.js"></script>
+<script src="js/app_progress.js"></script>
 
