@@ -25,10 +25,13 @@ $(function(){
     }
   });
 	$('#progress-link').bind('click', function() {
-		$('div').remove('.hero-unit');
-		$('div.span12').prepend('<div class="hero-unit"></div>')
+    $('#eachday').hide();
+    $('#welcomescreen').hide();
+    
+		$('#trackprogress').remove();
+		$('div.hero-unit').append('<div id="trackprogress"></div> <!-- track progress -->')
 		var allData = window.dailyHabits
-		var habbits = window.habits
+		var habbits = window.habits    
 		for (var i = 0;i<habbits.length;i++){
       var progressData = _.map(allData, 
         function(dataForADay){return dataForADay[i];
@@ -36,12 +39,10 @@ $(function(){
       var progressSum = _.reduce(progressData, 
         function(memo, num){return memo + num;
         });
-      console.log(progressSum)
 			var tm = new TrackModel({name: habbits[i], progress:(progressSum*100/7).toFixed(2)});
   		var view = new TrackProgressView({model: tm});
-  		$('div.hero-unit').append(view.render().el)
+  		$('#trackprogress').append(view.render().el)
   	}
-
 
   });//end progress-link bind click
 });
