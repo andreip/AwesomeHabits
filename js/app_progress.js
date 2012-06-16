@@ -1,22 +1,25 @@
 /* track progress */
+var TrackModel = Backbone.Model.extend({
+  initialize: function() {
+  if (!this.get("name")){
+    this.set({"name":"habit"}); 
+    this.set({"progress":32});
+    this.set({"data": [0]})
+  }
+  if(null == this.get("data") || this.get("data").length > 7){
+    throw new Error("invalid data");
+  }
+  var progressSum = _.reduce(this.get("data"), function(memo, num){return memo + num;});
+  this.set({progress:(progressSum*100/7).toFixed(2)});
+  }
+});
+
+
 $(function(){
-
-	var TrackModel = Backbone.Model.extend({
-			initialize: function() {
-			if (!this.get("name")){
-				this.set({"name":"habit"}); 
-				this.set({"progress":32});
-        this.set({"data": new Array()})
-			}
-      var progressSum = _.reduce(this.get("data"), function(memo, num){return memo + num;});
-      this.set({progress:(progressSum*100/7).toFixed(2)});
-		}
-	});
-
   var TrackProgressEntryView = Backbone.View.extend({
     tagName:  "li",
     className: "hero-entry",
-    template: _.template($('#progress-template').html()),
+    template: _.template($('#progress-template').length?$('#progress-template').html():'<h3><%= name %> <%= progress %>%</h3>'),
     events: {},
     initialize: function() {
       //
