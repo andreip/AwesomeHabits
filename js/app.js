@@ -8,4 +8,11 @@ habits.push("Brisk-walk at least 30 minutes a day");
 habits.push("Brush teeth twice a day");
 habits.push("Help a friend");
 habits.push("Refrain from watching TV");
+var dailyHabits=new Array();
+for (var di = 0; di < 7; di++) {
+  dailyHabits[di]=new Array();
+  for (var hi = 0; hi < habits.length; hi++) {
+    dailyHabits[di][hi]=0;
+  }
+}
 
