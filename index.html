@@ -56,13 +56,13 @@ body {
 </div> <!-- id="welcomescreen" -->
 <div id="eachday" class="visualstate" style="display: none;">
 </div> <!-- id="eachday" -->
-<div id="trackprogress" class="visualstate"></div> <!-- track progress -->
+<div id="trackprogress" class="visualstate"><table class="table table-striped"><tbody></tbody></table></div> <!-- track progress -->
 </div>
 </div>
 </div>
 </div>
 <script type="text/template" id="progress-template">
-    <h3><%= name %> <%= progress %>%</h3>
+    <td><%= name %></td><td><%= progress %>%</td>
 </script>
 </body>
 </html>

@@ -17,9 +17,9 @@ var TrackModel = Backbone.Model.extend({
 
 $(function(){
   var TrackProgressEntryView = Backbone.View.extend({
-    tagName:  "li",
+    tagName:  "tr",
     className: "hero-entry",
-    template: _.template($('#progress-template').length?$('#progress-template').html():'<h3><%= name %> <%= progress %>%</h3>'),
+    template: _.template($('#progress-template').length?$('#progress-template').html():'<td><%= name %></td><td><%= progress %>%</td>'),
     events: {},
     initialize: function() {
       //
@@ -53,7 +53,8 @@ $(function(){
     },    
     //keep data when model is available & bind
     render: function(){
-      this.$el.children().remove(); 
+      var tbody = this.$el.find('tbody');
+      tbody.children().remove()
       
       var allData = window.dailyHabits
       var habits = window.habits    
@@ -61,7 +62,7 @@ $(function(){
         var progressData = _.map(allData, function(dataForADay){return dataForADay[i];});
         var tm = new TrackModel({name: habits[i], data: progressData});
         var entryView = new TrackProgressEntryView({model: tm});
-        this.$el.append(entryView.render().el)        
+        tbody.append(entryView.render().el)        
       }
 
       return this.el;
