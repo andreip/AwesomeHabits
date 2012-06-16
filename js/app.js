@@ -15,4 +15,6 @@ for (var di = 0; di < 7; di++) {
     dailyHabits[di][hi]=0;
   }
 }
+$("#notchecked_0_1").click( function(e) { e.preventDefault(); dailyHabits[0][1]=1; $("#notchecked_0_1").hide(); $("#checked_0_1").show(); } )
+$("#checked_0_1").click( function(e) { e.preventDefault(); dailyHabits[0][1]=0; $("#checked_0_1").hide(); $("#notchecked_0_1").show(); } )
 
