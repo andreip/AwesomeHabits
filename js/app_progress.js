@@ -43,7 +43,8 @@ $(function(){
       this.$el.hide();
     },
 
-    show: function(){
+    show: function(e){
+      e.preventDefault()
       console.log("in show");
       window.track.render();
       $(".visualstate").hide( "fast", function() { 
