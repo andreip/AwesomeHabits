@@ -6,8 +6,11 @@ $(function(){
 			if (!this.get("name")){
 				this.set({"name":"habit"}); 
 				this.set({"progress":32});
-				}
+        this.set({"data": new Array()})
 			}
+      var progressSum = _.reduce(this.get("data"), function(memo, num){return memo + num;});
+      this.set({progress:(progressSum*100/7).toFixed(2)});
+		}
 	});
 
   var TrackProgressEntryView = Backbone.View.extend({
@@ -16,6 +19,7 @@ $(function(){
     template: _.template($('#progress-template').html()),
     events: {},
     initialize: function() {
+      //
     },
 
     render: function() {
@@ -34,7 +38,6 @@ $(function(){
     initialize: function() {
       $('#progress-link').bind('click', this.show);
       this.$el.hide();
-
     },
 
     show: function(){
@@ -44,24 +47,18 @@ $(function(){
         $('#trackprogress').show();
       });
       
-    },
-    
-
+    },    
+    //keep data when model is available & bind
     render: function(){
-      this.$el.children().remove();    
+      this.$el.children().remove(); 
       
       var allData = window.dailyHabits
       var habits = window.habits    
       for (var i = 0;i<habits.length;i++){
-        var progressData = _.map(allData, 
-          function(dataForADay){return dataForADay[i];
-          });
-        var progressSum = _.reduce(progressData, 
-          function(memo, num){return memo + num;
-          });
-        var tm = new TrackModel({name: habits[i], progress:(progressSum*100/7).toFixed(2)});
-        var view = new TrackProgressEntryView({model: tm});
-        this.$el.append(view.render().el)        
+        var progressData = _.map(allData, function(dataForADay){return dataForADay[i];});
+        var tm = new TrackModel({name: habits[i], data: progressData});
+        var entryView = new TrackProgressEntryView({model: tm});
+        this.$el.append(entryView.render().el)        
       }
 
       return this.el;
