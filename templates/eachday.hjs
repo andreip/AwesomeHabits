@@ -1,0 +1,16 @@
+<h2>Well, it's time to check in.</h2>
+<h3>Do this at the end of each day.</h3>
+<br>
+{{#each habits}}
+  <div id={{button_id}} class="button">
+    {{#if this.checked}}
+    <button class="btn btn-mini">
+    {{else}}
+    <button class="btn btn-mini btn-inverse">
+    {{/if}}
+      <span class="ascii-checkbox">{{this.checkbox}}</span>
+      <span class="text-habits">{{this.text}}</span>
+    </button>
+    <br>
+  </div>
+{{/each}}
