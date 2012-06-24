@@ -28,9 +28,7 @@ $("#gohome").click( function(e) {
 
 function rewriteEachDayDivFromScratch()
 {
-  // Reset the current eachday div
   el = $("#eachday")
-  el.html("");
 
   /* Get today's habits and add them to a hashmap
    * of the form {'habits' : [ ... ]}.
