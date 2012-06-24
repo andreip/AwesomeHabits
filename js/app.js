@@ -56,6 +56,7 @@ function rewriteEachDayDivFromScratch()
     // Render the html compiled template
     el.html(html)
   });
+}
 
 /* This binds the click event to the function
  * now and also in the future. We need in the
