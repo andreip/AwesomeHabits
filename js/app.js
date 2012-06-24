@@ -57,6 +57,22 @@ function rewriteEachDayDivFromScratch()
     el.html(html)
   });
 
-  $(".notchecked").click( function(e) { e.preventDefault(); var currentHabit=parseInt($(this).attr("id").replace(/^notchecked_/, "")); dailyHabits[currentDay][currentHabit]=1; $("#notchecked_"+currentHabit).hide(); $("#checked_"+currentHabit).show(); } );
-  $(".checked").click( function(e) { e.preventDefault(); var currentHabit=parseInt($(this).attr("id").replace(/^checked_/, "")); dailyHabits[currentDay][currentHabit]=0; $("#checked_"+currentHabit).hide(); $("#notchecked_"+currentHabit).show(); } );
-}
+/* This binds the click event to the function
+ * now and also in the future. We need in the
+ * future because there is no clue to when
+ * the button .btn-mini will be rendered.
+ */
+$('.btn-mini').live('click', function(e) {
+    e.preventDefault();
+    // Capture the clicked button and its id
+    var el = $(e.currentTarget);
+    var id = el.parent('div').attr('id');
+
+    el.toggleClass('btn-inverse');
+    // Toggle value in model
+    var todaysHabits = dailyHabits[currentDay];
+    var val = 1 - todaysHabits[id]['checked'];
+    todaysHabits[id]['checked'] = val;
+    // Toggle the checkbox
+    el.find('span.ascii-checkbox').text(checkBoxes[val]);
+});
