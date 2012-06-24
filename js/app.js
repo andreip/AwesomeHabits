@@ -11,6 +11,21 @@ for (var di = 0; di < 7; di++) {
   }
 }
 
+$(".pretend").click( function(e) {
+  e.preventDefault();
+  currentDay = $(e.currentTarget).attr('id')
+  $('.visualstate').hide();
+  rewriteEachDayDivFromScratch();
+  $('#eachday').show();
+});
+
+$("#gohome").click( function(e) {
+  e.preventDefault();
+  $(".visualstate").hide();
+  $("#welcomescreen").show();
+});
+
+
 function rewriteEachDayDivFromScratch()
 {
   // Reset the current eachday div
