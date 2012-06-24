@@ -33,7 +33,14 @@ function rewriteEachDayDivFromScratch()
   }
   params = { 'habits': habits };
 
-  // TODO, get template with requirejs
+  require(["text!templates/eachday.hjs"], function(tpl) {
+    // Compile the template with params and get the html
+    var template = Handlebars.compile(tpl);
+    var html = template(params);
+
+    // Render the html compiled template
+    el.html(html)
+  });
 
   $(".notchecked").click( function(e) { e.preventDefault(); var currentHabit=parseInt($(this).attr("id").replace(/^notchecked_/, "")); dailyHabits[currentDay][currentHabit]=1; $("#notchecked_"+currentHabit).hide(); $("#checked_"+currentHabit).show(); } );
   $(".checked").click( function(e) { e.preventDefault(); var currentHabit=parseInt($(this).attr("id").replace(/^checked_/, "")); dailyHabits[currentDay][currentHabit]=0; $("#checked_"+currentHabit).hide(); $("#notchecked_"+currentHabit).show(); } );
